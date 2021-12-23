@@ -1,8 +1,9 @@
 {
-  "name": "reactjs-vite-tailwindcss-boilerplate",
-  "description": "This is a React + vite boilerplate to be used with Tailwindcss.",
+  "name": "fancy-todo-app",
+  "description": "A todo app with a little added spice",
   "version": "0.2.0",
   "private": true,
+  "author": {"name": "Tyler Wilson", "url": "https://github.com/twilsonn"},
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
