@@ -4,7 +4,7 @@ import { todoListState } from 'store'
 import Container from 'components/Container'
 
 const Todo: React.FC = () => {
-  const [todos, _] = useRecoilState(todoListState)
+  const [todos] = useRecoilState(todoListState)
 
   return (
     <div>
