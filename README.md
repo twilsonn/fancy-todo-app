@@ -100,8 +100,6 @@ Usage Here
 - [ ] Add rich text editing
 - [ ] Add drag and drop rearrangement
 
-See the [open issues](https://github.com/othneildrew/Best-README-Template/issues) for a full list of proposed features (and known issues).
-
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 <!-- LICENSE -->
@@ -114,7 +112,7 @@ Distributed under the GNU GPLv3 License. See `LICENSE.txt` for more information.
 <!-- CONTACT -->
 ## Contact
 
-Your Name - [@your_twitter](https://twitter.com/your_username) - email@example.com
+<!-- Your Name - [@your_twitter](https://twitter.com/your_username) - email@example.com -->
 
 Project Link: [https://github.com/twilsonn/fancy-todo-app](https://github.com/twilsonn/fancy-todo-app)
 
@@ -130,5 +128,6 @@ Use this space to list resources you find helpful and would like to give credit 
 * [Choose an Open Source License](https://choosealicense.com)
 * [GitHub Pages](https://pages.github.com)
 * [Hero Icons](https://react-icons.github.io/react-icons/search)
+* [react-input-autosize](https://www.npmjs.com/package/react-input-autosize)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
