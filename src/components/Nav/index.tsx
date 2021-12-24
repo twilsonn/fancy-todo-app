@@ -1,3 +1,4 @@
+import CreateNewTodo from 'components/CreateNewTodo'
 import React from 'react'
 
 const Nav: React.FC<unknown> = () => {
@@ -8,12 +9,7 @@ const Nav: React.FC<unknown> = () => {
           <h2 className="text-2xl font-semibold">Todo List</h2>
         </li>
         <li>
-          <button
-            type="button"
-            className="py-2 px-6 font-semibold text-white rounded-lg shadow-md bg-fuchsia-500 shadow-fuchsia-200 hover:bg-fuchsia-600"
-          >
-            New Todo
-          </button>
+          <CreateNewTodo />
         </li>
       </ul>
     </nav>
