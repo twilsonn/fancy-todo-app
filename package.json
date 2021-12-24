@@ -1,5 +1,6 @@
 {
   "name": "fancy-todo-app",
+  "homepage": "https://twilsonn.github.io/fancy-todo-app/",
   "description": "A todo app with a little added spice",
   "version": "0.2.0",
   "private": true,
