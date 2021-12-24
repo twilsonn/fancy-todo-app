@@ -1,14 +1,15 @@
+import React from 'react'
+import { useRecoilState } from 'recoil'
+import { todoListState } from 'store'
 import Container from 'components/Container'
-import Context from 'context'
-import React, { useContext } from 'react'
 
-const Todo: React.FC<unknown> = () => {
-  const { state } = useContext(Context)
+const Todo: React.FC = () => {
+  const [todos, _] = useRecoilState(todoListState)
 
   return (
     <div>
       <div className="grid grid-cols-3 gap-6 mt-6">
-        {state.todos?.map(({ id, title, details, tags }) => {
+        {todos?.map(({ id, title, details, tags }) => {
           return (
             <Container key={id} ClassName="prose flex flex-col h-64">
               <div>

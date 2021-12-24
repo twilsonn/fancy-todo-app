@@ -1,13 +1,14 @@
-import React, { useContext, useState } from 'react'
+import React, { useState } from 'react'
+import { useRecoilState } from 'recoil'
 import { v4 } from 'uuid'
-import Context from 'context'
 
 import { Input, Textarea } from 'components/Forms'
 import Modal from 'components/Model'
 import Tags from './Tags'
+import { todoListState } from 'store'
 
 const CreateNewTodo: React.FC = () => {
-  const { dispatch } = useContext(Context)
+  const [todos, setTodos] = useRecoilState(todoListState)
 
   const [active, setActive] = useState(false)
 
@@ -23,7 +24,7 @@ const CreateNewTodo: React.FC = () => {
   }
 
   const createNewTodo = () => {
-    dispatch({ type: 'ADD_TODO', payload: { id: v4(), title, details, tags } })
+    setTodos([...todos, { id: v4(), title, details, tags }])
     toggleActive()
   }
 
