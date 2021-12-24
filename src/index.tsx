@@ -1,19 +1,16 @@
-import { StrictMode, useReducer } from 'react'
+import { StrictMode } from 'react'
 import { render } from 'react-dom'
+import { RecoilRoot } from 'recoil'
 
 import './assets/index.css'
 import App from 'components/App'
-import Context from 'context'
-import reducer, { initialState } from './store'
 
 const Main = () => {
-  const [state, dispatch] = useReducer(reducer, initialState)
-
   return (
     <StrictMode>
-      <Context.Provider value={{ state, dispatch }}>
+      <RecoilRoot>
         <App />
-      </Context.Provider>
+      </RecoilRoot>
     </StrictMode>
   )
 }
