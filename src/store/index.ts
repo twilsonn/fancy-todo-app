@@ -46,3 +46,4 @@ const todoListState = atom<Todo[]>({
 })
 
 export { todoListState }
+export type { Todo }
