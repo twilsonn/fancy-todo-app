@@ -9,7 +9,7 @@ const Todo: React.FC = () => {
   return (
     <div>
       <div className="grid grid-cols-3 gap-6 mt-6">
-        {todos?.map(({ id, title, details, tags }) => {
+        {todos.map(({ id, title, details, tags }) => {
           return (
             <Container key={id} ClassName="prose flex flex-col h-64">
               <div>
@@ -17,7 +17,7 @@ const Todo: React.FC = () => {
                 <p>{details}</p>
               </div>
               <div className="flex justify-end items-end space-x-2 h-full">
-                {tags?.map((tag) => {
+                {tags.map((tag) => {
                   return (
                     <span
                       key={tag}

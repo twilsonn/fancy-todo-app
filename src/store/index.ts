@@ -31,7 +31,7 @@ const todoListState = atom<Todo[]>({
     },
     {
       id: v4(),
-      title: 'Play Elder scrolls online ⚔️',
+      title: 'Play Elder scrolls online 🤺',
       details: "don't take an arrow to the knee",
       tags: ['online', 'gaming']
     },
@@ -45,5 +45,15 @@ const todoListState = atom<Todo[]>({
   ]
 })
 
-export { todoListState }
+const newTodoState = atom<Todo>({
+  key: 'newTodoState',
+  default: {
+    id: v4(),
+    title: '',
+    details: '',
+    tags: []
+  }
+})
+
+export { todoListState, newTodoState }
 export type { Todo }
