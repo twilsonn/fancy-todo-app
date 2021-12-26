@@ -2,34 +2,25 @@ import React, { useState } from 'react'
 import { useRecoilState } from 'recoil'
 import { v4 } from 'uuid'
 
+import { newTodoState, todoListState } from 'store'
+
 import { Input, Textarea } from 'components/Forms'
 import Modal from 'components/Model'
 import Tags from './Tags'
-import { todoListState } from 'store'
 
 const CreateNewTodo: React.FC = () => {
   const [todos, setTodos] = useRecoilState(todoListState)
-
+  const [todo, setTodo] = useRecoilState(newTodoState)
   const [active, setActive] = useState(false)
 
-  const [title, setTitle] = useState('')
-  const [details, setDetails] = useState('')
-  const [tags, setTags] = useState<string[]>([])
-
   const toggleActive = () => {
-    setTitle('')
-    setDetails('')
-    setTags([])
+    setTodo({ id: v4(), title: '', details: '', tags: [] })
     setActive(!active)
   }
 
   const createNewTodo = () => {
-    setTodos([...todos, { id: v4(), title, details, tags }])
+    setTodos([...todos, todo])
     toggleActive()
-  }
-
-  const addNewTag = (tag: string) => {
-    setTags([...tags, tag])
   }
 
   return (
@@ -41,20 +32,20 @@ const CreateNewTodo: React.FC = () => {
           <div className="w-full">
             <Input
               title="title"
-              value={title}
-              changeValue={(e) => setTitle(e.target.value)}
+              value={todo.title}
+              changeValue={(e) => setTodo({ ...todo, title: e.target.value })}
             />
           </div>
 
           <div className="w-full">
             <Textarea
               title="details"
-              value={details}
-              changeValue={(e) => setDetails(e.target.value)}
+              value={todo.details}
+              changeValue={(e) => setTodo({ ...todo, details: e.target.value })}
             />
           </div>
 
-          <Tags tags={tags} addNewTag={addNewTag} />
+          <Tags />
 
           <button
             type="button"

@@ -1,21 +1,21 @@
 import { PlusIcon } from '@heroicons/react/solid'
 import React, { KeyboardEvent, useState } from 'react'
 import AutosizeInput from 'react-input-autosize'
+import { useRecoilState } from 'recoil'
+import { newTodoState } from 'store'
 import Tag from './Tag'
 
-const Tags: React.FC<{ tags: string[]; addNewTag: (tag: string) => void }> = ({
-  tags,
-  addNewTag
-}) => {
+const Tags: React.FC = () => {
   const [value, setValue] = useState('')
   const [active, setActive] = useState(false)
+  const [todo, setTodo] = useRecoilState(newTodoState)
 
   const handleKeyDown: React.KeyboardEventHandler<HTMLInputElement> = (
     event: KeyboardEvent
   ) => {
     if (event.key === 'Enter') {
       setActive(false)
-      addNewTag(value)
+      setTodo({ ...todo, tags: [...todo.tags, value] })
       setValue('')
     }
   }
@@ -24,7 +24,7 @@ const Tags: React.FC<{ tags: string[]; addNewTag: (tag: string) => void }> = ({
     <div className="w-full">
       <span className="block text-sm font-medium text-gray-700">Tags</span>
       <div className="flex flex-wrap justify-start items-center">
-        {tags.map((tag) => {
+        {todo.tags.map((tag) => {
           return <Tag key={tag} name={tag} />
         })}
         <button className="flex py-2 px-2 mt-2 mr-1 h-10 rounded-full bg-slate-100">
