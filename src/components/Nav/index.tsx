@@ -1,4 +1,5 @@
 import CreateNewTodo from 'components/CreateNewTodo'
+
 import React from 'react'
 
 const Nav: React.FC<unknown> = () => {
@@ -8,6 +9,7 @@ const Nav: React.FC<unknown> = () => {
         <li className="flex items-center">
           <h2 className="text-2xl font-semibold">Todo List 🎄</h2>
         </li>
+
         <li>
           <CreateNewTodo />
         </li>
