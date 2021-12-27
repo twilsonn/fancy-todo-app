@@ -1,5 +1,8 @@
 import { atom } from 'recoil'
+import { recoilPersist } from 'recoil-persist'
 import { v4 } from 'uuid'
+
+const { persistAtom } = recoilPersist()
 
 type Todo = {
   id: string
@@ -42,7 +45,8 @@ const todoListState = atom<Todo[]>({
         'Try to get involved in open source dev. Start with the small tasks.',
       tags: ['online', 'coding']
     }
-  ]
+  ],
+  effects_UNSTABLE: [persistAtom]
 })
 
 const newTodoState = atom<Todo>({
