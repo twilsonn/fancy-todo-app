@@ -1,5 +1,5 @@
 import Nav from './Nav'
-import Todo from './Todo'
+import TodoList from './Todo'
 
 function App() {
   return (
@@ -8,7 +8,7 @@ function App() {
         <Nav />
       </header>
       <section>
-        <Todo />
+        <TodoList />
       </section>
     </div>
   )
