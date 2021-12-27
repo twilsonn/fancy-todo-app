@@ -1,5 +1,5 @@
 import { PlusIcon } from '@heroicons/react/solid'
-import React, { KeyboardEvent, useState } from 'react'
+import React, { KeyboardEvent, useRef, useState } from 'react'
 import AutosizeInput from 'react-input-autosize'
 import { useRecoilState } from 'recoil'
 import { newTodoState } from 'store'
@@ -14,11 +14,26 @@ const Tags: React.FC = () => {
     event: KeyboardEvent
   ) => {
     if (event.key === 'Enter') {
-      setActive(false)
-      setTodo({ ...todo, tags: [...todo.tags, value] })
+      const newTags = new Set([...todo.tags, value])
+      setTodo({ ...todo, tags: [...newTags] })
       setValue('')
     }
   }
+
+  const activeTagContent = useRef<HTMLButtonElement>(null)
+
+  const clickOutsideContent = (e: MouseEvent) => {
+    if (
+      activeTagContent.current &&
+      active &&
+      !activeTagContent.current.contains(e.target as Node)
+    ) {
+      setActive(false)
+      setValue('')
+    }
+  }
+
+  document.addEventListener('mousedown', clickOutsideContent)
 
   return (
     <div className="w-full">
@@ -27,7 +42,10 @@ const Tags: React.FC = () => {
         {todo.tags.map((tag) => {
           return <Tag key={tag} name={tag} />
         })}
-        <button className="flex py-2 px-2 mt-2 mr-1 h-10 rounded-full bg-slate-100">
+        <button
+          ref={activeTagContent}
+          className="flex py-2 px-2 mt-2 mr-1 h-10 rounded-full bg-slate-100"
+        >
           {active && (
             <AutosizeInput
               placeholder=" "
@@ -35,7 +53,7 @@ const Tags: React.FC = () => {
               autoFocus
               onChange={(e) => setValue(e.target.value)}
               onKeyDown={handleKeyDown}
-              inputClassName="p-0 pl-1 m-0 bg-transparent text-sm font-medium -translate-y-0.5 border-none focus:border-none ring-0 focus:ring-0 outline-none focus:outline-none"
+              inputClassName="p-0 pl-1 m-0 bg-transparent text-sm font-medium -translate-y-1 border-none focus:border-none ring-0 focus:ring-0 outline-none focus:outline-none"
             />
           )}
 
