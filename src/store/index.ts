@@ -1,4 +1,4 @@
-import { atom } from 'recoil'
+import { atom, selector } from 'recoil'
 import { recoilPersist } from 'recoil-persist'
 import { v4 } from 'uuid'
 
@@ -49,6 +49,20 @@ const todoListState = atom<Todo[]>({
   effects_UNSTABLE: [persistAtom]
 })
 
+const todoListFilterState = atom({
+  key: 'todoListFilterState',
+  default: ''
+})
+
+const filteredTodoListState = selector({
+  key: 'filteredTodoListState',
+  get: ({ get }) => {
+    const filter = get(todoListFilterState)
+    const list = get(todoListState)
+    return filter ? list.filter((t) => t.tags.includes(filter)) : list
+  }
+})
+
 const newTodoState = atom<Todo>({
   key: 'newTodoState',
   default: {
@@ -59,5 +73,10 @@ const newTodoState = atom<Todo>({
   }
 })
 
-export { todoListState, newTodoState }
+export {
+  todoListState,
+  newTodoState,
+  todoListFilterState,
+  filteredTodoListState
+}
 export type { Todo }

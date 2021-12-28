@@ -1,10 +1,16 @@
 import React, { useState, MouseEvent, useRef } from 'react'
-import { useRecoilState } from 'recoil'
-import { todoListState, Todo } from 'store'
+import { useRecoilState, useRecoilValue } from 'recoil'
+import {
+  todoListState,
+  Todo,
+  filteredTodoListState,
+  todoListFilterState
+} from 'store'
 import Container from 'components/Container'
 
 const TodoList: React.FC = () => {
-  const [todos] = useRecoilState(todoListState)
+  const todos = useRecoilValue(filteredTodoListState)
+  const [filter, setFilter] = useRecoilState(todoListFilterState)
 
   const [selected, setSelected] = useState<Todo[] | []>([])
 
@@ -49,6 +55,9 @@ const TodoList: React.FC = () => {
                       key={tag}
                       ref={tagRef}
                       data-value="tag"
+                      onClick={() =>
+                        filter === tag ? setFilter('') : setFilter(tag)
+                      }
                       className="py-2 px-3 text-sm font-semibold rounded-full cursor-pointer bg-slate-200 hover:bg-slate-300"
                     >
                       {tag}
