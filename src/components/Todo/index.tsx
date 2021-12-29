@@ -1,15 +1,18 @@
-import React, { useState, MouseEvent, useRef } from 'react'
+import React, { useState, MouseEvent, useRef, KeyboardEvent } from 'react'
 import { useRecoilState, useRecoilValue } from 'recoil'
+import useKeypress from 'react-use-keypress'
+
 import {
-  todoListState,
   Todo,
   filteredTodoListState,
-  todoListFilterState
+  todoListFilterState,
+  todoListState
 } from 'store'
 import Container from 'components/Container'
 
 const TodoList: React.FC = () => {
-  const todos = useRecoilValue(filteredTodoListState)
+  const filteredTodos = useRecoilValue(filteredTodoListState)
+  const [todos, setTodos] = useRecoilState(todoListState)
   const [filter, setFilter] = useRecoilState(todoListFilterState)
 
   const [selected, setSelected] = useState<Todo[] | []>([])
@@ -27,12 +30,18 @@ const TodoList: React.FC = () => {
     }
   }
 
+  useKeypress(['x', 'Backspace', 'Delete'], () => {
+    if (selected.length > 0) {
+      setTodos([...todos.filter((t) => !selected.some((s) => t.id === s.id))])
+    }
+  })
+
   const tagRef = useRef<HTMLSpanElement>(null)
 
   return (
     <div>
       <div className="grid grid-cols-3 gap-6 mt-6">
-        {todos.map((todo) => {
+        {filteredTodos.map((todo) => {
           const { id, title, details, tags } = todo
           return (
             <Container
