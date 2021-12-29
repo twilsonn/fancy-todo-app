@@ -1,4 +1,4 @@
-import React, { useState, MouseEvent, useRef, KeyboardEvent } from 'react'
+import React, { useState, MouseEvent, useRef } from 'react'
 import { useRecoilState, useRecoilValue } from 'recoil'
 import useKeypress from 'react-use-keypress'
 
