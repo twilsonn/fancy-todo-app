@@ -32,7 +32,11 @@ const TodoList: React.FC = () => {
 
   useKeypress(['x', 'Backspace', 'Delete'], () => {
     if (selected.length > 0) {
-      setTodos([...todos.filter((t) => !selected.some((s) => t.id === s.id))])
+      setTodos([
+        ...todos.map((t) =>
+          selected.some((s) => t.id === s.id) ? { ...t, active: false } : t
+        )
+      ])
     }
   })
 
