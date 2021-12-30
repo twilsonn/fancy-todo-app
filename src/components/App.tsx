@@ -7,9 +7,9 @@ function App() {
       <header className="my-4">
         <Nav />
       </header>
-      <section>
+      <main>
         <TodoList />
-      </section>
+      </main>
     </div>
   )
 }
