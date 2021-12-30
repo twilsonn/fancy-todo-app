@@ -9,6 +9,7 @@ type Todo = {
   title: string
   details: string
   tags: string[]
+  active: boolean
 }
 
 const todoListState = atom<Todo[]>({
@@ -18,32 +19,37 @@ const todoListState = atom<Todo[]>({
       id: v4(),
       title: 'Water my plants 💦',
       details: "The cactus' and snake plant needs watering on sunday morning!",
-      tags: ['plants', 'house']
+      tags: ['plants', 'house'],
+      active: true
     },
     {
       id: v4(),
       title: 'Pick up package from store',
       details: 'The store is open until 6pm',
-      tags: ['travel', 'shopping']
+      tags: ['travel', 'shopping'],
+      active: true
     },
     {
       id: v4(),
       title: 'Order some new headphones 🎶',
       details: 'Look online for open ear headphones!',
-      tags: ['shopping', 'online']
+      tags: ['shopping', 'online'],
+      active: true
     },
     {
       id: v4(),
       title: 'Play Elder scrolls online 🤺',
       details: "don't take an arrow to the knee",
-      tags: ['online', 'gaming']
+      tags: ['online', 'gaming'],
+      active: true
     },
     {
       id: v4(),
       title: 'Contribute to open source development!',
       details:
         'Try to get involved in open source dev. Start with the small tasks.',
-      tags: ['online', 'coding']
+      tags: ['online', 'coding'],
+      active: true
     }
   ],
   effects_UNSTABLE: [persistAtom]
@@ -59,7 +65,9 @@ const filteredTodoListState = selector({
   get: ({ get }) => {
     const filter = get(todoListFilterState)
     const list = get(todoListState)
-    return filter ? list.filter((t) => t.tags.includes(filter)) : list
+    return filter
+      ? list.filter((t) => t.tags.includes(filter) && t.active)
+      : list.filter((t) => t.active)
   }
 })
 
@@ -69,7 +77,8 @@ const newTodoState = atom<Todo>({
     id: v4(),
     title: '',
     details: '',
-    tags: []
+    tags: [],
+    active: true
   }
 })
 
