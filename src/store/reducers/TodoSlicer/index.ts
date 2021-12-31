@@ -67,6 +67,13 @@ export const TodoSlice = createSlice({
       state.value = [
         ...state.value.filter((t) => !action.payload.includes(t.id))
       ]
+    },
+    filterTodos: (state, action: PayloadAction<string>) => {
+      state.value = [
+        ...state.value.map((t) =>
+          t.tags.includes(action.payload) ? t : { ...t, active: false }
+        )
+      ]
     }
   }
 })
@@ -83,7 +90,7 @@ export const blankTodo: () => Todo = () => {
 
 export type { Todo }
 
-export const { addTodo, deleteTodo } = TodoSlice.actions
+export const { addTodo, deleteTodo, filterTodos } = TodoSlice.actions
 
 export const selectTodo = (state: RootState) => state.todos.value
 
