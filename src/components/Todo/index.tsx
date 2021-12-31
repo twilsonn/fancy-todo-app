@@ -1,8 +1,8 @@
-import React, { useState, MouseEvent, useRef } from 'react'
+import React, { useState, MouseEvent } from 'react'
 import useKeypress from 'react-use-keypress'
 
 import { useAppDispatch, useAppSelector } from '../../hooks'
-import { deleteTodo, Todo } from 'store/reducers/TodoSlicer'
+import { deleteTodo, filterTodos, Todo } from 'store/reducers/TodoSlicer'
 
 import Container from 'components/Container'
 import { AppDispatch } from 'store'
@@ -37,7 +37,7 @@ const TodoList: React.FC = () => {
       <div className="grid grid-cols-3 gap-6 mt-6">
         {todos.map((todo) => {
           const { id, title, details, tags } = todo
-          return (
+          return todo.active ? (
             <Container
               key={id}
               onClick={(e) => toggleSelected(e, todo)}
@@ -57,6 +57,7 @@ const TodoList: React.FC = () => {
                     <span
                       key={tag}
                       data-value="tag"
+                      onClick={() => dispatch(filterTodos(tag))}
                       className="py-2 px-3 text-sm font-semibold rounded-full cursor-pointer bg-slate-200 hover:bg-slate-300"
                     >
                       {tag}
@@ -65,7 +66,7 @@ const TodoList: React.FC = () => {
                 })}
               </div>
             </Container>
-          )
+          ) : null
         })}
       </div>
     </div>
