@@ -13,6 +13,7 @@ type Todo = {
 
 interface TodoState {
   value: Todo[]
+  filter: string
 }
 
 const initialState: TodoState = {
@@ -53,7 +54,8 @@ const initialState: TodoState = {
       tags: ['online', 'coding'],
       active: true
     }
-  ]
+  ],
+  filter: ''
 }
 
 export const TodoSlice = createSlice({
@@ -69,6 +71,16 @@ export const TodoSlice = createSlice({
       ]
     },
     filterTodos: (state, action: PayloadAction<string>) => {
+      if (state.filter === action.payload) {
+        state.value = [
+          ...state.value.map((t) => {
+            return { ...t, active: true }
+          })
+        ]
+        state.filter = ''
+        return
+      }
+      state.filter = action.payload
       state.value = [
         ...state.value.map((t) =>
           t.tags.includes(action.payload) ? t : { ...t, active: false }
