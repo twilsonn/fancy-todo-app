@@ -1,91 +1,21 @@
-import { atom, selector } from 'recoil'
-import { recoilPersist } from 'recoil-persist'
-import { v4 } from 'uuid'
+import { configureStore } from '@reduxjs/toolkit'
 
-const { persistAtom } = recoilPersist()
+import todosReducer from './reducers/TodoSlicer'
 
-type Todo = {
-  id: string
-  title: string
-  details: string
-  tags: string[]
-  active: boolean
-}
+// const filter = get(todoListFilterState)
+// const list = get(todoListState)
+// return filter
+//   ? list.filter((t) => t.tags.includes(filter) && t.active)
+//   : list.filter((t) => t.active)
 
-const todoListState = atom<Todo[]>({
-  key: 'todoListState',
-  default: [
-    {
-      id: v4(),
-      title: 'Water my plants 💦',
-      details: "The cactus' and snake plant needs watering on sunday morning!",
-      tags: ['plants', 'house'],
-      active: true
-    },
-    {
-      id: v4(),
-      title: 'Pick up package from store',
-      details: 'The store is open until 6pm',
-      tags: ['travel', 'shopping'],
-      active: true
-    },
-    {
-      id: v4(),
-      title: 'Order some new headphones 🎶',
-      details: 'Look online for open ear headphones!',
-      tags: ['shopping', 'online'],
-      active: true
-    },
-    {
-      id: v4(),
-      title: 'Play Elder scrolls online 🤺',
-      details: "don't take an arrow to the knee",
-      tags: ['online', 'gaming'],
-      active: true
-    },
-    {
-      id: v4(),
-      title: 'Contribute to open source development!',
-      details:
-        'Try to get involved in open source dev. Start with the small tasks.',
-      tags: ['online', 'coding'],
-      active: true
-    }
-  ],
-  effects_UNSTABLE: [persistAtom]
-})
-
-const todoListFilterState = atom({
-  key: 'todoListFilterState',
-  default: ''
-})
-
-const filteredTodoListState = selector({
-  key: 'filteredTodoListState',
-  get: ({ get }) => {
-    const filter = get(todoListFilterState)
-    const list = get(todoListState)
-    return filter
-      ? list.filter((t) => t.tags.includes(filter) && t.active)
-      : list.filter((t) => t.active)
+const store = configureStore({
+  reducer: {
+    todos: todosReducer
   }
 })
 
-const newTodoState = atom<Todo>({
-  key: 'newTodoState',
-  default: {
-    id: v4(),
-    title: '',
-    details: '',
-    tags: [],
-    active: true
-  }
-})
+export type RootState = ReturnType<typeof store.getState>
+// Inferred type: {posts: PostsState, comments: CommentsState, users: UsersState}
+export type AppDispatch = typeof store.dispatch
 
-export {
-  todoListState,
-  newTodoState,
-  todoListFilterState,
-  filteredTodoListState
-}
-export type { Todo }
+export default store
