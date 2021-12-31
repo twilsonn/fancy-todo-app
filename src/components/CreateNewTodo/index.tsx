@@ -1,26 +1,38 @@
 import React, { useState } from 'react'
-import { useRecoilState } from 'recoil'
-import { v4 } from 'uuid'
 
-import { newTodoState, todoListState } from 'store'
+import { useAppDispatch } from 'hooks'
+import { AppDispatch } from 'store'
+import { addTodo, blankTodo, Todo } from 'store/reducers/TodoSlicer'
 
-import { Input, Textarea } from 'components/Forms'
 import Modal from 'components/Model'
+import { Input, Textarea } from 'components/Forms'
 import Tags from './Tags'
 
+export type TagFunction = (name: string) => void
+
 const CreateNewTodo: React.FC = () => {
-  const [todos, setTodos] = useRecoilState(todoListState)
-  const [todo, setTodo] = useRecoilState(newTodoState)
+  const dispatch: AppDispatch = useAppDispatch()
+
+  const [todo, setTodo] = useState<Todo>(blankTodo())
   const [active, setActive] = useState(false)
 
   const toggleActive = () => {
-    setTodo({ id: v4(), title: '', details: '', tags: [] })
+    setTodo(blankTodo())
     setActive(!active)
   }
 
   const createNewTodo = () => {
-    setTodos([...todos, todo])
+    dispatch(addTodo(todo))
     toggleActive()
+  }
+
+  const addTag = (name: string) => {
+    const newTags = new Set([...todo.tags, name])
+    setTodo({ ...todo, tags: [...newTags] })
+  }
+
+  const removeTag = (name: string) => {
+    setTodo({ ...todo, tags: [...todo.tags.filter((tag) => tag === name)] })
   }
 
   return (
@@ -45,7 +57,7 @@ const CreateNewTodo: React.FC = () => {
             />
           </div>
 
-          <Tags />
+          <Tags tags={todo.tags} addTag={addTag} removeTag={removeTag} />
 
           <button
             type="button"
