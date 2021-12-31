@@ -1,21 +1,23 @@
 import { PlusIcon } from '@heroicons/react/solid'
 import React, { KeyboardEvent, useRef, useState } from 'react'
 import AutosizeInput from 'react-input-autosize'
-import { useRecoilState } from 'recoil'
-import { newTodoState } from 'store'
+import { TagFunction } from '..'
+
 import Tag from './Tag'
 
-const Tags: React.FC = () => {
+const Tags: React.FC<{
+  tags: string[]
+  addTag: TagFunction
+  removeTag: TagFunction
+}> = ({ tags, addTag, removeTag }) => {
   const [value, setValue] = useState('')
   const [active, setActive] = useState(false)
-  const [todo, setTodo] = useRecoilState(newTodoState)
 
   const handleKeyDown: React.KeyboardEventHandler<HTMLInputElement> = (
     event: KeyboardEvent
   ) => {
     if (event.key === 'Enter') {
-      const newTags = new Set([...todo.tags, value])
-      setTodo({ ...todo, tags: [...newTags] })
+      addTag(value)
       setValue('')
     }
   }
@@ -39,8 +41,8 @@ const Tags: React.FC = () => {
     <div className="w-full">
       <span className="block text-sm font-medium text-gray-700">Tags</span>
       <div className="flex flex-wrap justify-start items-center">
-        {todo.tags.map((tag) => {
-          return <Tag key={tag} name={tag} />
+        {tags.map((tag) => {
+          return <Tag removeTag={removeTag} key={tag} name={tag} />
         })}
         <button
           ref={activeTagContent}
