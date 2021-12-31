@@ -1,6 +1,7 @@
 import { StrictMode } from 'react'
 import { render } from 'react-dom'
-import { RecoilRoot } from 'recoil'
+import { Provider } from 'react-redux'
+import store from './store'
 
 import './assets/index.css'
 import App from 'components/App'
@@ -8,9 +9,9 @@ import App from 'components/App'
 const Main = () => {
   return (
     <StrictMode>
-      <RecoilRoot>
+      <Provider store={store}>
         <App />
-      </RecoilRoot>
+      </Provider>
     </StrictMode>
   )
 }
