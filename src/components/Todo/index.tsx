@@ -32,8 +32,6 @@ const TodoList: React.FC = () => {
     }
   })
 
-  const tagRef = useRef<HTMLSpanElement>(null)
-
   return (
     <div>
       <div className="grid grid-cols-3 gap-6 mt-6">
@@ -58,7 +56,6 @@ const TodoList: React.FC = () => {
                   return (
                     <span
                       key={tag}
-                      ref={tagRef}
                       data-value="tag"
                       className="py-2 px-3 text-sm font-semibold rounded-full cursor-pointer bg-slate-200 hover:bg-slate-300"
                     >
