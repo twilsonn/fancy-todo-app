@@ -1,6 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit'
 
 import todosReducer from './reducers/TodoSlicer'
+import undoable from 'redux-undo'
 
 // const filter = get(todoListFilterState)
 // const list = get(todoListState)
@@ -10,7 +11,7 @@ import todosReducer from './reducers/TodoSlicer'
 
 const store = configureStore({
   reducer: {
-    todos: todosReducer
+    todos: undoable(todosReducer)
   }
 })
 
