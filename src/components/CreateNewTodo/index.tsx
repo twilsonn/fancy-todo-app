@@ -2,11 +2,12 @@ import React, { useState } from 'react'
 
 import { useAppDispatch } from 'hooks'
 import { AppDispatch } from 'store'
-import { addTodo, blankTodo, Todo } from 'store/reducers/TodoSlicer'
+import { addTodo } from 'store/reducers/TodoSlicer'
 
 import Modal from 'components/Model'
 import { Input, Textarea } from 'components/Forms'
 import Tags from './Tags'
+import { blankTodo, Todo } from 'store/reducers/TodoSlicer/types'
 
 export type TagFunction = (name: string) => void
 
