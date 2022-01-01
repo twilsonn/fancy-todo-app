@@ -1,14 +1,16 @@
-import React, { useState, MouseEvent } from 'react'
+import React, { useState, MouseEvent, KeyboardEvent } from 'react'
 import useKeypress from 'react-use-keypress'
 
-import { useAppDispatch, useAppSelector } from '../../hooks'
-import { deleteTodo, filterTodos, Todo } from 'store/reducers/TodoSlicer'
+import { useAppDispatch, useAppSelector, useEventListener } from '../../hooks'
+import { deleteTodo, filterTodos } from 'store/reducers/TodoSlicer'
+import { Todo } from 'store/reducers/TodoSlicer/types'
 
 import Container from 'components/Container'
 import { AppDispatch } from 'store'
+import { ActionCreators } from 'redux-undo'
 
 const TodoList: React.FC = () => {
-  const todos = useAppSelector((state) => state.todos.value)
+  const todos = useAppSelector((state) => state.todos.present.value)
   const dispatch: AppDispatch = useAppDispatch()
 
   const [selected, setSelected] = useState<Todo[] | []>([])
@@ -17,6 +19,7 @@ const TodoList: React.FC = () => {
     if ((e.target as HTMLElement).getAttribute('data-value') === 'tag') {
       return
     }
+
     if (selected.some((t) => t.id === todo.id)) {
       e.ctrlKey
         ? setSelected(selected.filter((t) => t.id !== todo.id))
@@ -26,9 +29,25 @@ const TodoList: React.FC = () => {
     }
   }
 
+  useEventListener('mousedown', (e: Event) =>
+    (e.target as HTMLElement).getAttribute('data-value')?.includes('todo')
+      ? void {}
+      : setSelected([])
+  )
+
   useKeypress(['x', 'Backspace', 'Delete'], () => {
     if (selected.length > 0) {
       dispatch(deleteTodo(selected.map((t) => t.id)))
+    }
+  })
+
+  useKeypress(['z', 'y'], (e: KeyboardEvent<HTMLElement>) => {
+    if (e.key === 'z' && e.ctrlKey) {
+      dispatch(ActionCreators.undo())
+    }
+
+    if (e.key === 'y' && e.ctrlKey) {
+      dispatch(ActionCreators.redo())
     }
   })
 
@@ -41,13 +60,16 @@ const TodoList: React.FC = () => {
             <Container
               key={id}
               onClick={(e) => toggleSelected(e, todo)}
+              dataValue={
+                selected.some((t) => t.id === id) ? 'todo selected' : 'todo'
+              }
               ClassName={`prose flex flex-col h-64 cursor-pointer select-none ${
                 selected.some((t) => t.id === id)
                   ? 'ring-fuchsia-500 ring-2'
                   : ''
               }`}
             >
-              <div>
+              <div className="pointer-events-none">
                 <h3 className="mt-0">{title}</h3>
                 <p>{details}</p>
               </div>
