@@ -1,3 +1,4 @@
+import InteractionBar from './InteractionBar'
 import Nav from './Nav'
 import TodoList from './Todo'
 
@@ -8,6 +9,7 @@ function App() {
         <Nav />
       </header>
       <main>
+        <InteractionBar />
         <TodoList />
       </main>
     </div>
