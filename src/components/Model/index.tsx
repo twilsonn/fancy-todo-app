@@ -1,5 +1,6 @@
-import Container from 'components/Container'
 import React, { useRef } from 'react'
+import { motion } from 'framer-motion'
+import Container from 'components/Container'
 
 const Modal: React.FC<{ active: boolean; toggleActive: VoidFunction }> = ({
   children,
@@ -22,11 +23,20 @@ const Modal: React.FC<{ active: boolean; toggleActive: VoidFunction }> = ({
 
   return active ? (
     <>
-      <div className="flex absolute top-0 left-0 z-10 justify-center items-center w-full h-full bg-black bg-opacity-20">
-        <div ref={modalContent} className="w-full max-w-sm prose">
+      <motion.div
+        initial={{ backgroundColor: 'rgba(0,0,0,0)' }}
+        animate={{ backgroundColor: 'rgba(0,0,0,0.3)' }}
+        className="flex absolute top-0 left-0 z-10 justify-center items-center w-full h-full bg-black bg-opacity-20"
+      >
+        <motion.div
+          ref={modalContent}
+          className="w-full max-w-sm prose"
+          initial={{ scale: 0.8 }}
+          animate={{ scale: 1 }}
+        >
           <Container ClassName="shadow-slate-400">{children}</Container>
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
     </>
   ) : null
 }
