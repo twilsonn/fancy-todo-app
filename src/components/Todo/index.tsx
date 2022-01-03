@@ -53,7 +53,7 @@ const TodoList: React.FC = () => {
 
   return (
     <div>
-      <div className="grid grid-cols-3 gap-6 mt-6">
+      <div className="grid grid-cols-3 gap-6 mt-3">
         {todos.map((todo) => {
           const { id, title, details, tags } = todo
           return todo.active ? (
