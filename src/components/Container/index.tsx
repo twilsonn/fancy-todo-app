@@ -2,10 +2,11 @@ import React, { MouseEventHandler } from 'react'
 
 // eslint-disable-next-line @typescript-eslint/ban-types
 const Container: React.FC<{
+  key?: string
   ClassName?: string
   dataValue?: string
   onClick?: MouseEventHandler
-}> = ({ children, ClassName, dataValue, onClick }) => {
+}> = ({ key, children, ClassName, dataValue, onClick }) => {
   return (
     <div
       onClick={onClick}
