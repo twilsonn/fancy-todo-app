@@ -5,3 +5,7 @@
 html {
     @apply bg-slate-100;
 }
+
+.react-grid-item.react-grid-placeholder {
+    @apply bg-transparent border-4 border-dashed border-slate-800 rounded-2xl
+}
