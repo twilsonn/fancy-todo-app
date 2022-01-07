@@ -47,18 +47,28 @@ const filterTodosAction: CaseReducer<TodoState, PayloadAction<string>> = (
   }
 }
 
+const toggleLockAction: CaseReducer<TodoState> = (
+  state
+) => {
+  return {
+    ...state,
+    locked: !state.locked
+  }
+}
+
 export const TodoSlice = createSlice({
   name: 'todos',
   initialState,
   reducers: {
     addTodo: addTodoAction,
     deleteTodo: deleteTodoAction,
-    filterTodos: filterTodosAction
+    filterTodos: filterTodosAction,
+    toggleLock: toggleLockAction
   }
 })
 
-export const { addTodo, deleteTodo, filterTodos } = TodoSlice.actions
+export const { addTodo, deleteTodo, filterTodos, toggleLock } = TodoSlice.actions
 
-export const selectTodo = (state: RootState) => state.todos.present.value
+export const selectTodo = (state: RootState) => state.present.value
 
 export default TodoSlice.reducer

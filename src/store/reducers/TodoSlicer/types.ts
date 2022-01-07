@@ -10,7 +10,7 @@ type Todo = {
 
 interface TodoStateInterface {
   value: Todo[]
-
+  locked: boolean
   filter: string
 }
 
@@ -53,7 +53,8 @@ const initialState: TodoStateInterface = {
       active: true
     }
   ],
-  filter: ''
+  filter: '',
+  locked: true
 }
 
 export const blankTodo: () => Todo = () => {
