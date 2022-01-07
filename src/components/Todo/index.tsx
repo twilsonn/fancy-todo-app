@@ -11,7 +11,9 @@ import { AppDispatch } from 'store'
 import { ActionCreators } from 'redux-undo'
 
 const TodoList: React.FC = () => {
-  const todos = useAppSelector((state) => state.todos.present.value)
+  const todos = useAppSelector((state) => state.present.value)
+  const locked = useAppSelector((state) => state.present.locked)
+
   const dispatch: AppDispatch = useAppDispatch()
 
   const layout = todos
@@ -76,6 +78,7 @@ const TodoList: React.FC = () => {
       compactType="horizontal"
       isResizable={false}
       isBounded={true}
+      isDraggable={!locked}
     >
       {todos.map((todo) => {
         const { id, title, details, tags } = todo
