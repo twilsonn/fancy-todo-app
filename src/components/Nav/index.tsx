@@ -1,6 +1,7 @@
 import CreateNewTodo from 'components/CreateNewTodo'
 
 import React from 'react'
+import Settings from './Settings'
 
 const Nav: React.FC<unknown> = () => {
   return (
@@ -10,8 +11,10 @@ const Nav: React.FC<unknown> = () => {
           <h2 className="text-2xl font-semibold">Todo List</h2>
         </li>
 
-        <li>
+        <li className='flex'>
           <CreateNewTodo />
+          <div className='w-2' />
+          <Settings />
         </li>
       </ul>
     </nav>
