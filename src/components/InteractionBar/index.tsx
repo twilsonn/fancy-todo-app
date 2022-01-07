@@ -3,7 +3,7 @@ import { useAppSelector } from 'hooks'
 import { motion } from 'framer-motion'
 
 const InteractionBar: React.FC = () => {
-  const todos = useAppSelector((state) => state.todos.present)
+  const todos = useAppSelector((state) => state.present)
   return todos.filter ? (
     <motion.div
       initial={{ height: '0', opacity: 0 }}
