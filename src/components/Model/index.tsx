@@ -2,10 +2,11 @@ import React, { useRef } from 'react'
 import { motion } from 'framer-motion'
 import Container from 'components/Container'
 
-const Modal: React.FC<{ active: boolean; toggleActive: VoidFunction }> = ({
+const Modal: React.FC<{ className?: string,active: boolean; toggleActive: VoidFunction }> = ({
   children,
   active,
-  toggleActive
+  toggleActive,
+  className
 }) => {
   const modalContent = useRef<HTMLInputElement>(null)
 
@@ -30,7 +31,7 @@ const Modal: React.FC<{ active: boolean; toggleActive: VoidFunction }> = ({
       >
         <motion.div
           ref={modalContent}
-          className="w-full max-w-sm prose"
+          className={`w-full min-w-sm prose ${className}`}
           initial={{ scale: 0.8 }}
           animate={{ scale: 1 }}
         >
