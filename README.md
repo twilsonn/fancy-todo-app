@@ -42,7 +42,9 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
+<p align="center">
+  <img src="https://github.com/twilsonn/fancy-todo-app/blob/e710d07108cf486d6bf406966afce2892fd0b326/src/assets/Fancy%20Todo%20List.png" />
+</p>
 
 This project was initally made with the intention to enhance my portfolio of applications however i've added some interesting features such as filters, drag and drop agrangement and searching.
 
@@ -56,7 +58,6 @@ This project was initally made with the intention to enhance my portfolio of app
 * [React.js](https://reactjs.org/)
 * [Tailwind CSS](https://tailwindcss.com)
 * [Vite](https://vitejs.dev)
-* [Jest](https://jestjs.io)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -96,9 +97,9 @@ Usage Here
 <!-- ROADMAP -->
 ## Roadmap
 
-- [ ] Add filtering by tags
+- [x] Add filtering by tags
 - [ ] Add rich text editing
-- [ ] Add drag and drop rearrangement
+- [x] Add drag and drop rearrangement
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
