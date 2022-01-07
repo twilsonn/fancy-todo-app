@@ -1,8 +1,9 @@
-import React, { useState } from 'react'
+import React, { useState, KeyboardEvent } from 'react'
+import useKeypress from 'react-use-keypress'
 
 import { useAppDispatch } from 'hooks'
 import { AppDispatch } from 'store'
-import { addTodo } from 'store/reducers/TodoSlicer'
+import { addTodo, toggleLock } from 'store/reducers/TodoSlicer'
 
 import Modal from 'components/Model'
 import { Input, Textarea } from 'components/Forms'
@@ -36,9 +37,19 @@ const CreateNewTodo: React.FC = () => {
     setTodo({ ...todo, tags: [...todo.tags.filter((tag) => tag === name)] })
   }
 
+  useKeypress(['v', 'q'], (e: KeyboardEvent<HTMLElement>) => {
+    if (e.key === 'v' && e.ctrlKey) {
+      setActive(!active)
+    }
+
+    if (e.key === 'q' && e.ctrlKey) {
+      dispatch(toggleLock())
+    }
+  })
+
   return (
     <div>
-      <Modal active={active} toggleActive={toggleActive}>
+      <Modal active={active} toggleActive={toggleActive} className="w-96">
         <h4 className="mt-0">Create New Todo</h4>
 
         <div className="flex flex-col items-end mt-4 space-y-4">
@@ -73,7 +84,7 @@ const CreateNewTodo: React.FC = () => {
       <button
         type="button"
         onClick={toggleActive}
-        className="py-2 px-6 font-semibold text-white rounded-lg shadow-md bg-fuchsia-500 shadow-fuchsia-200 hover:bg-fuchsia-600"
+        className="inline-flex justify-center w-full rounded-md border border-fuchsia-500 text-sm font-medium focus:outline-none px-4 py-2 text-white shadow-sm bg-fuchsia-500 shadow-fuchsia-200 hover:bg-fuchsia-600"
       >
         New Todo
       </button>
