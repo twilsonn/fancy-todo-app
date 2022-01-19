@@ -57,11 +57,11 @@ const TodoList: React.FC = () => {
   })
 
   useKeypress(['z', 'y'], (e: KeyboardEvent<HTMLElement>) => {
-    if (e.key === 'z' && e.ctrlKey) {
+    if (e.key === 'z' && (e.ctrlKey || e.metaKey)) {
       dispatch(ActionCreators.undo())
     }
 
-    if (e.key === 'y' && e.ctrlKey) {
+    if (e.key === 'y' && (e.ctrlKey || e.metaKey)) {
       dispatch(ActionCreators.redo())
     }
   })
