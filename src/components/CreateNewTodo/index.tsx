@@ -37,12 +37,13 @@ const CreateNewTodo: React.FC = () => {
     setTodo({ ...todo, tags: [...todo.tags.filter((tag) => tag === name)] })
   }
 
-  useKeypress(['v', 'q'], (e: KeyboardEvent<HTMLElement>) => {
-    if (e.key === 'v' && e.ctrlKey) {
+  useKeypress(['b', 'q'], (e: KeyboardEvent<HTMLElement>) => {
+    // e.preventDefault()
+    if (e.key === 'b' && (e.ctrlKey || e.metaKey)) {
       setActive(!active)
     }
 
-    if (e.key === 'q' && e.ctrlKey) {
+    if (e.key === 'q' && (e.ctrlKey || e.metaKey)) {
       dispatch(toggleLock())
     }
   })
