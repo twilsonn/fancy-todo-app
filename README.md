@@ -29,7 +29,6 @@
         <li><a href="#installation">Installation</a></li>
       </ul>
     </li>
-    <li><a href="#usage">Usage</a></li>
     <li><a href="#roadmap">Roadmap</a></li>
     <li><a href="#license">License</a></li>
     <li><a href="#contact">Contact</a></li>
@@ -83,17 +82,6 @@ This project was initally made with the intention to enhance my portfolio of app
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-
-
-<!-- USAGE EXAMPLES -->
-## Usage
-
-Usage Here
-
-<p align="right">(<a href="#top">back to top</a>)</p>
-
-
-
 <!-- ROADMAP -->
 ## Roadmap
 
@@ -113,8 +101,6 @@ Distributed under the GNU GPLv3 License. See `LICENSE.txt` for more information.
 <!-- CONTACT -->
 ## Contact
 
-<!-- Your Name - [@your_twitter](https://twitter.com/your_username) - email@example.com -->
-
 Project Link: [https://github.com/twilsonn/fancy-todo-app](https://github.com/twilsonn/fancy-todo-app)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
@@ -124,11 +110,9 @@ Project Link: [https://github.com/twilsonn/fancy-todo-app](https://github.com/tw
 <!-- ACKNOWLEDGMENTS -->
 ## Acknowledgments
 
-Use this space to list resources you find helpful and would like to give credit to. I've included a few of my favorites to kick things off!
-
 * [Choose an Open Source License](https://choosealicense.com)
 * [GitHub Pages](https://pages.github.com)
-* [Hero Icons](https://react-icons.github.io/react-icons/search)
+* [Hero Icons](https://heroicons.com)
 * [react-input-autosize](https://www.npmjs.com/package/react-input-autosize)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
